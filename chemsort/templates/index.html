@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <h3>Useful Keyboard Shortcuts</h3>
+        <p>(use keyboard shortcuts to select unsorted/sorted text box)</p>
+        <p><em>Cntrl-a select-all; Cntrl-c copy selected; Cntrl-v paste clipboard</em></p>
+    </div>
+    <form>
+    <label for="inputId">file dialog</label>
+    <input id="inputId" type="file" style="position: fixed; top: -100em">
+    </form>
+<form method="POST">
+<table class="table">
+    <tr>
+    <td>unsorted items</td><td>sorted items</td>
+    </tr>
+    <tr>
+        <td>
+            <textarea class="textarea" id="unsorted" name="unsorted_items" rows="15" cols="100">{{ unsorted_items }}</textarea>
+        </td>
+        <td>
+            <textarea class="textarea" id="sorted" name="sorted_items" rows="15" cols="100">{{ sorted_items }}</textarea>
+        </td>
+    </tr>
+    <tr>
+        
+            <td>
+                <div class="buttons">
+                    <input class="button is-info" type="file" id="fileToLoad">
+                    <button class="button is-info" onclick="loadFileAsText();return false;">
+                        <span class="icon is-small"><i class="fas fa-file-upload"></i></span>
+                        <span>Load</span>
+                    </button>
+                    <button name="actionBtn" value="sort" class="button is-primary" type="submit">
+                        <span class="icon is-small"><i class="fas fa-sort-alpha-up"></i></span>
+                        <span>Sort</span>
+                    </button>
+                    <button name="actionBtn" value="clearUnsorted" class="button is-danger" type="" onclick="javascript:eraseSorted();" >
+                        <span class="icon is-small"><i class="fa fa-trash"></i></span>
+                        <span>Clear</span>
+                    </button>
+                </div>
+            </td>
+            <td>
+                <div class="buttons">
+                    <button name="localBtn" value="download" class="button is-info" type="" onclick="javascript:saveTextAsFile();">
+                        <span class="icon is-small">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span>Download</span>
+                    </button>
+                    <button name="actionBtn" value="clearSorted" class="button is-danger" type="Clear Sorted">
+                        <span class="icon is-small"><i class="fa fa-trash"></i></span>
+                        <span>Clear</span>
+                    </button>
+                    <input type="hidden" id="inputFileNameToSaveAs"></input>
+                </div>
+            </td>
+        </div>
+    </tr>
+</table>
+
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+function eraseSorted()
+   {  
+   document.getElementById('unsorted').value = "";
+   }
+   
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("sorted").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+ 
+function loadFileAsText()
+{
+    var fileToLoad = document.getElementById("fileToLoad").files[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) 
+    {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        document.getElementById("unsorted").value = textFromFileLoaded;
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+</script>
+{% endblock %}
+</body>
+</html>

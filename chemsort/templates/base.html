@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<div class="container">
+<nav class="navbar is-fresh is-transparent no-shadow" role="navigation" aria-label="main navigation">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="/">
+                            <img src="" alt="" width="88" height="40">
+                        </a>
+            
+                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+            
+                    <div id="navbar-menu" class="navbar-menu is-static">
+            
+                        <div class="navbar-end">
+                            <a href="{{ url_for('features') }}" class="navbar-item is-secondary">
+                                Features
+                            </a>
+                            <a href="{{ url_for('index') }}" class="navbar-item is-secondary">
+                                ChemSort
+                            </a>
+                            <a href="{{ url_for('contact') }}" class="navbar-item is-secondary">
+                                Contact
+                            </a>
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    Select Language
+                                </a>
+            
+                                <div class="navbar-dropdown">
+                                    <a class="navbar-item">
+                                        Portugese
+                                    </a>
+                                    <a class="navbar-item">
+                                        German
+                                    </a>
+                                    <a class="navbar-item">
+                                        English
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="{{ url_for('login') }}" class="navbar-item is-secondary modal-trigger" data-modal="auth-modal">
+                                Sign In
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+    <article class="tile notification is-warning">
+          <p class="title">Chemical Inventory Sorter</p>
+    </article>
+{% block content %}
+{% endblock %}
+<hr>
+<em>&copy; <script>document.write( new Date().getFullYear() );</script> Mike Thompson and Jeff Muday, all rights reserved.</em>
+</div>
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
