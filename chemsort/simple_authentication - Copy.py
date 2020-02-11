@@ -1,7 +1,7 @@
 # a simple-minded authentication module, replace in production
 # probably OAuth2 would be nice here.
 
-# change to valid values, don't use any valid account passwords!
+# change to valid values, don't use any actual account passwords!
 # since the form has a email validator, you would have to use an email
 # as the username
 userhive = [
