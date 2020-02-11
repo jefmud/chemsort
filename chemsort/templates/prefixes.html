@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="subtitle">Prefixes</h2>
+<form method="POST">
+    <textarea class="textarea" id="prefixes" name="prefixes" rows="15" cols="100">{{ prefixes }}</textarea>
+    <hr>
+    <div class="buttons">
+        <button class="button is-info" onclick="" name="action" value="save">
+            <span class="icon is-small"><i class="fas fa-save"></i></span>
+            <span>Save</span>
+        </button>
+        <button class="button is-warning" onclick="" name="action" value="cancel">
+            <span class="icon is-small"><i class="fas fa-window-close"></i></span>
+            <span>Cancel</span>
+        </button>
+</div>
+</form>
+{% endblock %}

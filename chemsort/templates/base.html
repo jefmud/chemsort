@@ -23,12 +23,14 @@
                     <div id="navbar-menu" class="navbar-menu is-static">
             
                         <div class="navbar-end">
-                            <a href="{{ url_for('features') }}" class="navbar-item is-secondary">
-                                Features
-                            </a>
                             <a href="{{ url_for('index') }}" class="navbar-item is-secondary">
                                 ChemSort
                             </a>
+                            {% if g.is_authenticated %}
+                                <a href="{{ url_for('prefixes') }}" class="navbar-item is-secondary modal-trigger" data-modal="auth-modal">
+                                    Prefixes
+                                </a>
+                            {% endif %}
                             <a href="{{ url_for('contact') }}" class="navbar-item is-secondary">
                                 Contact
                             </a>
@@ -49,9 +51,15 @@
                                     </a>
                                 </div>
                             </div>
-                            <a href="{{ url_for('login') }}" class="navbar-item is-secondary modal-trigger" data-modal="auth-modal">
-                                Sign In
-                            </a>
+                            {% if g.is_authenticated %}
+                                <a href="{{ url_for('logoff') }}" class="navbar-item is-secondary modal-trigger" data-modal="auth-modal">
+                                    Sign Off
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('login') }}" class="navbar-item is-secondary modal-trigger" data-modal="auth-modal">
+                                    Sign In
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

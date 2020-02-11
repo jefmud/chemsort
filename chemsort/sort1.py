@@ -1,11 +1,13 @@
 PREFIXES = []
 def init_order():
+    """load the prefixes structure"""
     global PREFIXES
     with open('prefixes.txt','r') as fp:
         prefixes = fp.read().split('\n')
     PREFIXES = []
     for p in prefixes:
-        PREFIXES.append(p.strip())
+        # strip of extraneous spaces and convert to lowercase
+        PREFIXES.append(p.strip().lower())
 
     
 def chem_compare(x,y):
@@ -32,18 +34,20 @@ def significant(x):
     return x
         
     
-    
-    
 def chem_compare2(x,y):
     """returns a 1 if x "comes before" y, 0 if after"""
     xs = significant(x)
     ys = significant(y)
-    print(x," compare ",y," ==> ",xs,' compare ',ys)
+    # debugging line below
+    # print(x," compare ",y," ==> ",xs,' compare ',ys)
     if xs < ys:
         return True
     return False
 
 def bubbleSort(arr, ascending=True):
+    """a traditional ARRAY bubble sort using chem_compare2"""
+    # this will have to get more complex when we introduce
+    # additional columns/objects to the data structure
     n = len(arr)
     
     # Traverse through all array elements
@@ -66,7 +70,7 @@ def bubbleSort(arr, ascending=True):
 
 if __name__ == '__main__':
     
-    x = ['the','quick','brown','fox','jumped','over','the','lazy','dog','aaron','aarvark',
+    x = ['DL-Alanine','the','quick','brown','fox','jumped','over','the','lazy','dog','aaron','aarvark',
          'alpha-galactosidase','erythro-dibromide','erythomycin', 'trans-2\'-Bromostyrene',
          'threo-2 3-dibromo-3-phenylpropanoic acid','2,3-Dibromo-3-phenylpropanoic acid']
     xs = significant("trans-2'-Bromostyrene")
